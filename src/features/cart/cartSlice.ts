@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 interface CartItem {
     id: number;
@@ -8,11 +8,11 @@ interface CartItem {
     quantity: number;
 }
 
-interface CartSlice {
+interface CartState {
     items: CartItem[];
 }
 
-const initialState: CartSlice = {
+const initialState: CartState = {
     items: [],
 };
 
