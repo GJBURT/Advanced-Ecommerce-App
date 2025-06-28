@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import type { AppDispatch } from '../redux/store';
+import { addToCart } from '../features/cart/cartSlice';
 
 interface Product {
     id: number;
@@ -35,6 +38,8 @@ const fetchProductByCategory = async (category: string) => {
 
 const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
+
+    const dispatch = useDispatch<AppDispatch>();
 
     const { data: categories } = useQuery({
         queryKey: ['categories'],
@@ -75,7 +80,16 @@ const Home = () => {
                         <p>{product.description}</p>
                         <p><strong>${product.price}</strong></p>
                         <p>Rating: {product.rating.rate} ⭐</p>
-                        <button>Add to Cart</button>
+                        <button
+                            onClick={() => dispatch(addToCart({
+                                id: product.id,
+                                title: product.title,
+                                price: product.price,
+                                image: product.image,
+                                quantity: 1
+                            }))
+                        }
+                        >Add to Cart</button>
                     </div>
                 ))}
             </div>
