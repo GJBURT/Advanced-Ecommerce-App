@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../redux/store';
-import { removeFromCart } from '../features/cart/cartSlice';
+import { clearCart, removeFromCart } from '../features/cart/cartSlice';
 // Cart component displays the items in the shopping cart
 // It allows users to view, remove items, and see the total price and quantity
 const Cart = () => {
@@ -33,6 +33,12 @@ const Cart = () => {
                     <div className="cart-summary">
                         <p>Total Items: {totalQuantity}</p>
                         <p>Total Price: ${totalPrice.toFixed(2)}</p>
+                        <button style={{ marginTop: '1rem', padding: '0.5rem 1rem' }} onClick={() => {
+                            dispatch(clearCart());
+                            alert('✅ Thank you! Your order has been placed.');
+                        }}>
+                            Proceed to Checkout
+                        </button>
                     </div>
                 </div>
             )}
