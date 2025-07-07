@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../redux/store';
 import { removeFromCart } from '../features/cart/cartSlice';
-
+// Cart component displays the items in the shopping cart
+// It allows users to view, remove items, and see the total price and quantity
 const Cart = () => {
     const dispatch = useDispatch();
     const cartItems = useSelector((state: RootState) => state.cart.items);
-
+    // Calculate total quantity and price of items in the cart
+    // totalQuantity is the sum of all item quantities in the cart
     const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 

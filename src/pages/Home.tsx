@@ -4,7 +4,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { addToCart } from '../features/cart/cartSlice';
-
+// Product interface defines the structure of a product object
+// It includes properties like id, title, price, category, description, image, and rating
 interface Product {
     id: number;
     title: string;
@@ -17,12 +18,15 @@ interface Product {
         count: number;
     };
 }
-
+// fetchCategories retrieves the list of product categories from the API
+// It returns an array of category strings
 const fetchCategories = async () => {
     const res = await axios.get<string[]>('https://fakestoreapi.com/products/categories');
     return res.data;
 };
-
+// fetchProductByCategory retrieves products based on the selected category
+// If the category is 'all', it fetches all products; otherwise, it fetches products from the specified category
+// It returns an array of Product objects
 const fetchProductByCategory = async (category: string) => {
     const url = category === 'all'
         ? 'https://fakestoreapi.com/products'
@@ -30,12 +34,8 @@ const fetchProductByCategory = async (category: string) => {
     const res = await axios.get<Product[]>(url);
     return res.data;
 };
-
-{/* const fetchProducts = async () => {
-    const res = await axios.get<Product[]>('https://fakestoreapi.com/products');
-    return res.data;
-}; */}
-
+// Home component displays the product catalog
+// It allows users to filter products by category and add items to the shopping cart
 const Home = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
