@@ -28,13 +28,13 @@ const Cart = () => {
                     <div>
                         <ul>
                             {cartItems.map(item => (
-                                <li key={item.id} style={{ marginBottom: '1rem', borderBottom: '1px solid #ccc', paddingBottom: '1rem' }}>
+                                <div key={item.id} className="cart-item">
                                     <img src={item.image} alt={item.title} style={{ width: '50px', height: '50px', objectFit: 'contain' }} />
                                     <strong> {item.title} </strong> <br />
                                     Quantity: {item.quantity} <br />
                                     Price: ${item.price.toFixed(2)} <br />
                                     <button onClick={() => dispatch(removeFromCart(item.id))}>Remove</button>
-                                </li>
+                                </div>
                             ))}
                         </ul>
                         <div className="cart-summary">

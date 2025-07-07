@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div style={{ padding: '2rem'}}>
+    <div className="container">
       <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
         <h1>🛍️ Advanced E-Commerce App</h1>
         <Link to="/cart">

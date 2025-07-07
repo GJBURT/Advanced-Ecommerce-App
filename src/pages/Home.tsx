@@ -71,11 +71,11 @@ const Home = () => {
 
             {isLoading && <p>Loading products...</p>}
             {error && <p>Error loading products.</p>}
-            
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem'}}>
+
+            <div className="product-grid">
                 {products?.map(product => (
-                    <div key={product.id} style={{ border: '1px solid #ccc', padding: '1rem'}}>
-                        <img src={product.image} alt={product.title} style={{width: '100px', height: '100px', objectFit: 'contain' }} />
+                    <div key={product.id} className="product-card">
+                        <img src={product.image} alt={product.title} />
                         <h3>{product.title}</h3>
                         <p>{product.description}</p>
                         <p><strong>${product.price}</strong></p>
