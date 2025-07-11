@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import type { RootState } from './redux/store';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const App: React.FC = () => {
   // Retrieve cart items from the Redux store
