@@ -4,6 +4,7 @@ import Cart from './pages/Cart';
 import { Routes, Route, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import type { RootState } from './redux/store';
+import Register from './pages/Register';
 
 const App: React.FC = () => {
   // Retrieve cart items from the Redux store
@@ -26,6 +27,7 @@ const App: React.FC = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>
