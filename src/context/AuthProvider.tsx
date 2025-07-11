@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { onAuthStateChanged, type User } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, type User } from 'firebase/auth';
 import { AuthContext, type AuthContextType } from './AuthContext';
 import { auth } from '../firebase/config'; // Import your Firebase auth instance
+import { signOut } from 'firebase/auth';
 
 // AuthProvider component
 export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
@@ -17,9 +18,24 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
         return () => unsubscribe();
     }, []);
 
+    const register = (email: string, password: string) => {
+        return createUserWithEmailAndPassword(auth, email, password);
+    };
+
+    const login = (email: string, password: string) => {
+        return signInWithEmailAndPassword(auth, email, password);
+    };
+
+    const logout = () => {
+        return signOut(auth);
+    };
+
     const value: AuthContextType = {
         user,
         loading,
+        register,
+        login,
+        logout,
     };
 
     return (
