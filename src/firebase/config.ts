@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 // Firebase configuration for the Advanced E-commerce App
 // This configuration is used to initialize Firebase services in the application
 // In real world production applications with sensitive data such as API keys would be stored securely using a .env file or similar method
@@ -13,4 +14,5 @@ const firebaseConfig = {
 };
 // Initialize Firebase with the provided configuration
 const app = initializeApp(firebaseConfig);
-export default app;
+
+export const auth = getAuth(app);
