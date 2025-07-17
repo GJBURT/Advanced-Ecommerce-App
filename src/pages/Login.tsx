@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
 import { FirebaseError } from 'firebase/app';
+import { loginUser } from '../firebase/auth';
+import './AuthStyles.css';
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
-    const { login } = useAuth();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,37 +17,38 @@ const Login: React.FC = () => {
         setError(null);
 
         try {
-            await login(email, password);
+            await loginUser(email, password);
             navigate('/'); // Redirect to home page after successful login
         } catch (err) {
             const errorMessage = err instanceof FirebaseError ? err.message : 'Login failed';
             setError(errorMessage);
         }
     };
-
-    if (loading) return <div>Loading...</div>;
-
+// This component provides a form for users to log in
+// It uses the loginUser function from the Firebase auth module to authenticate users
     return (
-        <div className="login-container">
-            <h2>Login</h2>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Login</button>
-                {error && <p className="error">{error}</p>}
-            </form>
+        <div className="auth-container">
+            <div className="auth-box">
+                <h2>Login</h2>
+                <form onSubmit={handleLogin}>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <button type="submit">Login</button>
+                    {error && <p className="error">{error}</p>}
+                </form>
+            </div>
         </div>
     );
 };

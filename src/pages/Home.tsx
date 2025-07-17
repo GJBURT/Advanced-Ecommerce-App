@@ -1,10 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../redux/store';
 import { addToCart } from '../features/cart/cartSlice';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import { useNavigate } from 'react-router-dom';
+// Update the import path or ensure useAuthContext is exported from AuthProvider
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
+
 // Product interface defines the structure of a product object
 // It includes properties like id, name, price, category, description, image
 interface Product {
@@ -41,7 +46,12 @@ const fetchCategories = async (): Promise<string[]> => {
 
 // Home component displays the product catalog
 // It allows users to filter products by category and add items to the shopping cart
-const Home = () => {
+function Home() {
+    const authContext = useContext(AuthContext);
+    const user = authContext?.user;
+    const loading = authContext?.loading;
+    const navigate = useNavigate();
+
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
     const dispatch = useDispatch<AppDispatch>();
@@ -55,6 +65,15 @@ const Home = () => {
         queryKey: ['products', selectedCategory],
         queryFn: () => fetchProducts(selectedCategory)
     });
+
+    useEffect(() => {
+        if (!loading && !user) {
+            navigate('/login'); // Redirect to login if not authenticated
+        }
+    }, [user, loading, navigate]);
+
+    if (loading) return <p>Loading...</p>; // Wait for auth state to load
+    if (!user) return null; // Don't render anything if user is not authenticated
 
     return (
         <main>

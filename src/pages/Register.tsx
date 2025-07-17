@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
 import { register } from '../firebase/auth'; // Import the register function
+import './AuthStyles.css'; // Import styles
 
 const Register: React.FC = () => {
     const [name, setName] = useState('');
@@ -26,12 +25,13 @@ const Register: React.FC = () => {
     };
 
     return (
-        <div className="register-container">
-            <h2>Register</h2>
-            <form onSubmit={handleRegister}>
-                <input
-                    type="text"
-                    placeholder="Full Name"
+        <div className="auth-container">
+            <div className="auth-box">
+                <h2>Register</h2>
+                <form onSubmit={handleRegister}>
+                    <input
+                        type="text"
+                        placeholder="Full Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -52,7 +52,8 @@ const Register: React.FC = () => {
                 />
                 <button type="submit">Register</button>
                 {error && <p className="error">{error}</p>}
-            </form>
+                </form>
+            </div>
         </div>
     );
 };
