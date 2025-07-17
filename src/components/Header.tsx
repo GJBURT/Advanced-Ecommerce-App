@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
@@ -9,6 +9,9 @@ const Header: React.FC = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
     const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const { user } = useContext(AuthContext);
+    const location = useLocation();
+    const isRegisterPage = location.pathname === '/register';
+    const isLoginPage = location.pathname === '/login';
 
     return (
         <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
@@ -25,9 +28,10 @@ const Header: React.FC = () => {
                 </>
                 ) : (
                 <>
-                    <Link to="/login">Login</Link>
-                    <br />
-                    <Link to="/register">Register</Link>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                    {isRegisterPage && <p>Already have an account? <Link to="/login">Login</Link></p>}
+                    {isLoginPage && <p>Don't have an account? <Link to="/register">Register</Link></p>}
+                </div>
                 </>
                 )}
             </nav>
