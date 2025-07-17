@@ -3,8 +3,10 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/config';
 import { useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
+import { register } from '../firebase/auth'; // Import the register function
 
 const Register: React.FC = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -15,7 +17,7 @@ const Register: React.FC = () => {
         setError(null);
 
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
+            await register(email, password, name);
             navigate('/'); // Redirect to home page after successful registration
         } catch (err) {
             const errorMessage = err instanceof FirebaseError ? err.message : 'Registration failed';
@@ -27,6 +29,13 @@ const Register: React.FC = () => {
         <div className="register-container">
             <h2>Register</h2>
             <form onSubmit={handleRegister}>
+                <input
+                    type="text"
+                    placeholder="Full Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                />
                 <input
                     type="email"
                     placeholder="Email"
