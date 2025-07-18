@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Header from './components/Header';
+import AdminPanel from './pages/AdminPanel'; // Import AdminPanel
 
 
 const App: React.FC = () => {
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/admin" element={<AdminPanel />} />
       </Routes>
     </div>
   );

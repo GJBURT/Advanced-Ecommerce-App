@@ -9,8 +9,11 @@ import { useUserData } from '../hooks/useUserData'; // Custom hook to fetch user
 const Header: React.FC = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
     const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-    const { user, role, setRole } = useContext(AuthContext);
-    const { userData, loading } = useUserData();
+    const authContext = useContext(AuthContext);
+    const user = authContext?.user;
+    const role = authContext?.role;
+    const setRole = authContext?.setRole;
+    const { userData } = useUserData();
     const isAdmin = userData?.role === 'admin';
 
     const location = useLocation();
@@ -27,7 +30,7 @@ const Header: React.FC = () => {
                     <select
                         id="role-select"
                         value={role}
-                        onChange={(e) => setRole(e.target.value)}
+                        onChange={(e) => setRole && setRole(e.target.value)}
                         style={{ marginLeft: '0.5rem' }}
                     >
                         <option value="customer">Customer</option>
