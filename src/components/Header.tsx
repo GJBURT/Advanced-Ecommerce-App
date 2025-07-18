@@ -4,11 +4,15 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import LogoutButton from './LogoutButton';
 import type { RootState } from '../redux/store';
+import { useUserData } from '../hooks/useUserData'; // Custom hook to fetch user data
 
 const Header: React.FC = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
     const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
     const { user, role, setRole } = useContext(AuthContext);
+    const { userData, loading } = useUserData();
+    const isAdmin = userData?.role === 'admin';
+
     const location = useLocation();
     const isRegisterPage = location.pathname === '/register';
     const isLoginPage = location.pathname === '/login';
@@ -31,6 +35,7 @@ const Header: React.FC = () => {
                     </select>
                     <Link to="/">Home </Link>
                     <Link to="/orders">My Orders </Link>
+                    { isAdmin && <Link to="/admin">Admin Panel</Link>}
                     <Link to="/cart">
                         🛒 Cart ({totalCount})
                     </Link>
