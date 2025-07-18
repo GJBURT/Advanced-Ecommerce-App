@@ -8,6 +8,8 @@ export interface AuthContextType {
     register: (email: string, password: string) => Promise<UserCredential>;
     login: (email: string, password: string) => Promise<UserCredential>;
     logout: () => Promise<void>;
+    role: string;
+    setRole: (newRole: string) => Promise<void>;
 }
 
 // Create AuthContext

@@ -8,7 +8,7 @@ import type { RootState } from '../redux/store';
 const Header: React.FC = () => {
     const cartItems = useSelector((state: RootState) => state.cart.items);
     const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-    const { user } = useContext(AuthContext);
+    const { user, role, setRole } = useContext(AuthContext);
     const location = useLocation();
     const isRegisterPage = location.pathname === '/register';
     const isLoginPage = location.pathname === '/login';
@@ -19,6 +19,16 @@ const Header: React.FC = () => {
             <nav>
                 {user ? (
                 <>
+                    <label htmlFor="role-select">Role: </label>
+                    <select
+                        id="role-select"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        style={{ marginLeft: '0.5rem' }}
+                    >
+                        <option value="customer">Customer</option>
+                        <option value="admin">Admin</option>
+                    </select>
                     <Link to="/">Home </Link>
                     <Link to="/orders">My Orders </Link>
                     <Link to="/cart">
