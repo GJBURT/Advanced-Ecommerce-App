@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 
 interface Product {
     id: string;
-    seeded: boolean; // Indicates if the product is a seeded demo product
     name: string;
     price: number;
+    category: string;
+    image: string;
     description: string;
+    seeded: boolean; // Indicates if the product is a seeded demo product
 }
 
 const AdminProducts: React.FC = () => {
@@ -60,19 +62,24 @@ const AdminProducts: React.FC = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>Demo</th>
                         <th>Name</th>
                         <th>Price</th>
+                        <th>Category</th>
+                        <th>Image</th>
                         <th>Description</th>
                         <th>Actions</th>
+                        <th>Demo</th>
                     </tr>
                 </thead>
                 <tbody>
                     {products.map(product => (
                         <tr key={product.id}>
-                            <td>{product.seeded && <span style={{ color: 'red', marginLeft: '0.5rem' }}>(Seeded)</span>}</td>
                             <td>{product.name}</td>
                             <td>${product.price.toFixed(2)}</td>
+                            <td>{product.category}</td>
+                            <td>
+                                <img src={product.image} alt={product.name} style={{ width: '50px' }} />
+                            </td>
                             <td>{product.description}</td>
                             <td>
                                 <Link to={`/admin/products/edit/${product.id}`}>
@@ -80,6 +87,7 @@ const AdminProducts: React.FC = () => {
                                 </Link>
                                 <button onClick={() => handleDelete(product.id)}>Delete</button>
                             </td>
+                            <td>{product.seeded && <span style={{ color: 'red', marginLeft: '0.5rem' }}>(Seeded)</span>}</td>
                         </tr>
                     ))}
                 </tbody>
