@@ -17,6 +17,7 @@ const Cart = () => {
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     const authContext = useContext(AuthContext);
+    const user = authContext?.user;
 
     const handleCheckout = async () => {
         if (!authContext?.user) {
@@ -28,6 +29,7 @@ const Cart = () => {
             const orderRef = collection(db, 'orders');
             await addDoc(orderRef, {
                 userId: authContext.user.uid,
+                items: cartItems,
                 totalQuantity,
                 totalPrice,
                 createdAt: Timestamp.now(),
