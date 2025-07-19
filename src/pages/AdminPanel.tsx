@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AdminPanel: React.FC = () => {
     return (
@@ -7,8 +8,12 @@ const AdminPanel: React.FC = () => {
             <p>Welcome, Admin! Choose an action:</p>
 
             <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                <button>📦 Manage Products</button>
-                <button>📋 View Orders</button>
+                <Link to="/admin/products">
+                    <button>📦 Manage Products</button>
+                </Link>
+                <Link to="/admin/orders">
+                    <button>📋 View Orders</button>
+                </Link>
             </div>
         </div>
     );
