@@ -10,6 +10,7 @@ import AdminRoute from './components/ProtectedRoute'; // Import ProtectedRoute f
 import AdminProducts from './pages/AdminProducts'; // Import AdminProducts
 import AdminOrders from './pages/AdminOrders'; // Import AdminOrders
 import AdminProductForm from './pages/AdminProductForm'; // Import AdminProductForm
+import Profile from './pages/Profile'; // Import Profile page
 
 
 const App: React.FC = () => {
@@ -18,10 +19,14 @@ const App: React.FC = () => {
     <div className="navbar">
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* Public routes */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/profile" element={<Profile />} />
+        
+        {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />
         <Route path="/admin/products" element={<AdminRoute><AdminProducts /></AdminRoute>} />
         <Route path="/admin/orders" element={<AdminRoute><AdminOrders /></AdminRoute>} />

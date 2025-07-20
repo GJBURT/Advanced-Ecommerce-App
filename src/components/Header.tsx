@@ -34,9 +34,12 @@ const Header: React.FC = () => {
                         <option value="customer">Customer</option>
                         <option value="admin">Admin</option>
                     </select>
-                    <Link to="/">Home </Link>
-                    <Link to="/orders">My Orders </Link>
                     { role === 'admin' && <Link to="/admin">Admin Panel</Link>}
+                    <Link to="/">Home </Link>
+                    {/* Show Profile link for all authenticated users */}
+                    <Link to="/profile">Profile </Link>
+                    {/* Show My Orders link only for customers */}
+                    {role === 'customer' && <Link to="/orders">My Orders </Link>}
                     <Link to="/cart">
                         🛒 Cart ({totalCount})
                     </Link>
