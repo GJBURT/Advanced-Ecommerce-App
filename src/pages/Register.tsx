@@ -6,11 +6,12 @@ import './AuthStyles.css'; // Import styles
 
 const Register: React.FC = () => {
     const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
-
+    // Handle registration form submission
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
@@ -23,7 +24,8 @@ const Register: React.FC = () => {
             setError(errorMessage);
         }
     };
-
+    // This component provides a form for users to register
+    // It uses the register function from the Firebase auth module to create a new user
     return (
         <div className="auth-container">
             <div className="auth-box">
@@ -34,6 +36,13 @@ const Register: React.FC = () => {
                         placeholder="Full Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    required
+                />
+                <input
+                    type="address"
+                    placeholder="Address"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                     required
                 />
                 <input
