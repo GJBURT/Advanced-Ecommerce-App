@@ -76,7 +76,13 @@ const AdminOrders: React.FC = () => {
                                 <p><strong>Customer Name:</strong> {order.customerName ?? 'Unknown User'}</p>
                                 <p><strong>Total Quantity:</strong> {order.totalQuantity}</p>
                                 <p><strong>Total Price:</strong> ${order.totalPrice.toFixed(2)}</p>
-                                <p><strong>Created At:</strong> {order.createdAt ? new Date(order.createdAt as any).toLocaleString() : 'N/A'}</p>
+                                <p><strong>Created At:</strong>{' '}
+                                    {order.createdAt instanceof Date
+                                        ? order.createdAt.toLocaleString()
+                                        : order.createdAt?.toDate?.().toLocaleString() || 'Unknown'}
+                                </p>
+
+
                                 <details style={{ marginTop: '1rem' }}>
                                     <summary>View Items</summary>
                                     {!Array.isArray(order.items) || order.items.length === 0 ? (
