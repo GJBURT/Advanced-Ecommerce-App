@@ -11,6 +11,7 @@ import AdminProducts from './pages/AdminProducts'; // Import AdminProducts
 import AdminOrders from './pages/AdminOrders'; // Import AdminOrders
 import AdminProductForm from './pages/AdminProductForm'; // Import AdminProductForm
 import Profile from './pages/Profile'; // Import Profile page
+import MyOrders from './pages/MyOrders'; // Import MyOrders page
 
 
 const App: React.FC = () => {
@@ -25,6 +26,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/my-orders" element={<MyOrders />} />
         
         {/* Admin routes */}
         <Route path="/admin" element={<AdminRoute><AdminPanel /></AdminRoute>} />

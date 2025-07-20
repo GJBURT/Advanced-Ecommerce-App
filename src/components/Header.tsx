@@ -39,7 +39,7 @@ const Header: React.FC = () => {
                     {/* Show Profile link for all authenticated users */}
                     <Link to="/profile">Profile </Link>
                     {/* Show My Orders link only for customers */}
-                    {role === 'customer' && <Link to="/orders">My Orders </Link>}
+                    {role === 'customer' && <Link to="/my-orders">My Orders </Link>}
                     <Link to="/cart">
                         🛒 Cart ({totalCount})
                     </Link>

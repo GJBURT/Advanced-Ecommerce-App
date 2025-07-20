@@ -77,9 +77,10 @@ const AdminOrders: React.FC = () => {
                                 <p><strong>Total Quantity:</strong> {order.totalQuantity}</p>
                                 <p><strong>Total Price:</strong> ${order.totalPrice.toFixed(2)}</p>
                                 <p><strong>Created At:</strong>{' '}
-                                    {order.createdAt instanceof Date
-                                        ? order.createdAt.toLocaleString()
-                                        : order.createdAt?.toDate?.().toLocaleString() || 'Unknown'}
+                                    {(order.createdAt instanceof Date
+                                    ? order.createdAt
+                                    : (order.createdAt as any)?.toDate?.()
+                                    )?.toLocaleString() || 'Unknown'}
                                 </p>
 
 
