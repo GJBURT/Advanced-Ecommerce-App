@@ -1,21 +1,23 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+
 // Firebase configuration for the Advanced E-commerce App
 // This configuration is used to initialize Firebase services in the application
-// In real world production applications with sensitive data such as API keys would be stored securely using a .env file or similar method
-// However, for portfolio project purposes, I am directly including it here.
 const firebaseConfig = {
-    apiKey: "AIzaSyB8F7X63eGUvpKMwkBIDHS8zW7qKuNqKu4",
-    authDomain: "advanced-ecommerce-app-9663a.firebaseapp.com",
-    projectId: "advanced-ecommerce-app-9663a",
-    storageBucket: "advanced-ecommerce-app-9663a.appspot.com",
-    messagingSenderId: "880241815482",
-    appId: "1:880241815482:web:56b10b01cd519165a2b783"
+    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
+
 // Initialize Firebase with the provided configuration
 export const app = initializeApp(firebaseConfig);
 
+// Export the initialized Firebase Auth and Firestore instances
 export const auth = getAuth(app);
 
+// Export the Firestore instance for database operations
 export const db = getFirestore(app);

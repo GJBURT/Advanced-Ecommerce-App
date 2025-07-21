@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../redux/store';
-import { clearCart, removeFromCart } from '../features/cart/cartSlice';
+import { clearCart, removeFromCart, updateQuantity } from '../features/cart/cartSlice';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase/config';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
@@ -57,6 +57,8 @@ const Cart = () => {
                     <p>Your cart is empty.</p>
                 ) : (
                     <div>
+                        {void console.log('Rendering cart items:', cartItems.map(item => item.productId))}
+
                         <ul>
                             {cartItems.map(item => (
                                 <CartItem
@@ -67,7 +69,7 @@ const Cart = () => {
                                     price={item.price}
                                     image={item.image}
                                     onRemove={(productId) => dispatch(removeFromCart(productId))}
-                                />
+                                    onQuantityChange={(productId: string, quantity: number) => dispatch(updateQuantity({ productId, quantity }))} />
                             ))}
                         </ul>
                         <div className="cart-summary">

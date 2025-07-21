@@ -36,6 +36,7 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action: PayloadAction<CartItem>) => {
+            console.log("🛒 Adding to cart:", action.payload);
             const existing = state.items.find(item => item.productId === action.payload.productId);
             if (existing) {
                 existing.quantity += action.payload.quantity;
@@ -44,6 +45,14 @@ const cartSlice = createSlice({
             }
             saveCartToSession(state.items); // Save the updated cart to session storage
         },
+        updateQuantity: (state, action: PayloadAction<{ productId: string; quantity: number }>) => {
+            const item = state.items.find(item => item.productId === action.payload.productId);
+            if (item) {
+                item.quantity = action.payload.quantity;
+                saveCartToSession(state.items);
+            }
+        },
+
         removeFromCart: (state, action: PayloadAction<string>) => {
             state.items = state.items.filter(item => item.productId !== action.payload);
             saveCartToSession(state.items); // Save the updated cart to session storage
@@ -55,6 +64,6 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, updateQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;

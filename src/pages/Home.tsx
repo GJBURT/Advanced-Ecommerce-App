@@ -11,9 +11,9 @@ import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
 
 // Product interface defines the structure of a product object
-// It includes properties like id, name, price, category, description, image
+// It includes properties like productId, name, price, category, description, image
 interface Product {
-    id: string;
+    productId: string;
     name: string;
     price: number;
     category: string;
@@ -31,7 +31,7 @@ const fetchProducts = async (category: string) => {
 
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => ({
-        id: doc.id,
+        productId: doc.id,
         ...doc.data()
     })) as Product[];
 }
@@ -100,14 +100,14 @@ function Home() {
 
                 <div className="product-grid">
                     {products?.map(product => (
-                        <div key={product.id} className="product-card">
+                        <div key={product.productId} className="product-card">
                             <img src={product.image} alt={product.name} />
                             <h3>{product.name}</h3>
                             <p>{product.description}</p>
                             <p><strong>${product.price ? product.price.toFixed(2) : 'N/A'}</strong></p>
                             <button
                                 onClick={() => dispatch(addToCart({
-                                    id: product.id,
+                                    productId: product.productId,
                                     name: product.name,
                                     price: product.price,
                                     image: product.image,

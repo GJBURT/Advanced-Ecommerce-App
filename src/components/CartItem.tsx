@@ -6,9 +6,9 @@ interface Props {
     quantity: number;
     price: number;
     image: string;
-    onRemove: (id: string) => void;
-    onQuantityChange?: (id: string, quantity: number) => void;
-    }
+    onRemove: (productId: string) => void;
+    onQuantityChange: (productId: string, quantity: number) => void;
+}
 
 const CartItem: React.FC<Props> = ({ productId, name, quantity, price, image, onRemove, onQuantityChange }) => {
     return (
