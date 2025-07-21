@@ -1,3 +1,4 @@
+jest.mock('./firebase/config');
 import '@testing-library/jest-dom';
 import 'whatwg-fetch';
 import { TextEncoder, TextDecoder } from 'util';
