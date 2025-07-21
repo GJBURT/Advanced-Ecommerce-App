@@ -20,7 +20,7 @@ describe('CartItem Component', () => {
             price={mockItem.price}
             image={mockItem.image}
             onRemove={() => {}}
-            onQuantityChange={() => {}}
+            onQuantityChange={jest.fn()}
         />
     );
 
@@ -41,6 +41,7 @@ describe('CartItem Component', () => {
             price={mockItem.price}
             image={mockItem.image}
             onRemove={mockRemove}
+            onQuantityChange={jest.fn()}
         />
     );
     // Find the remove button and simulate a click

@@ -19,12 +19,10 @@ interface Order {
 const MyOrders: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState<any>(null);
 
     useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
         if (currentUser) {
-            setUser(currentUser);
 
             const q = query(
                 collection(db, 'orders'),
@@ -39,9 +37,8 @@ const MyOrders: React.FC = () => {
 
             setOrders(fetchedOrders);
         } else {
-            setUser(null);
+            setLoading(false);
         }
-        setLoading(false);
     });
 
     return () => unsubscribe();
