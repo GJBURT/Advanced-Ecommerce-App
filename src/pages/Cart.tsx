@@ -6,6 +6,8 @@ import { db } from '../firebase/config';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import CartItem from '../components/CartItem';
+
 // Cart component displays the items in the shopping cart
 // It allows users to view, remove items, and see the total price and quantity
 const Cart = () => {
@@ -58,13 +60,15 @@ const Cart = () => {
                     <div>
                         <ul>
                             {cartItems.map(item => (
-                                <div key={item.id} className="cart-item">
-                                    <img src={item.image} alt={item.title} style={{ width: '50px', height: '50px', objectFit: 'contain' }} />
-                                    <strong> {item.title} </strong> <br />
-                                    Quantity: {item.quantity} <br />
-                                    Price: ${item.price.toFixed(2)} <br />
-                                    <button onClick={() => dispatch(removeFromCart(item.id))}>Remove</button>
-                                </div>
+                                <CartItem
+                                    key={item.id}
+                                    id={item.id}
+                                    name={item.name}
+                                    quantity={item.quantity}
+                                    price={item.price}
+                                    image={item.image}
+                                    onRemove={(id) => dispatch(removeFromCart(id))}
+                                />
                             ))}
                         </ul>
                         <div className="cart-summary">
