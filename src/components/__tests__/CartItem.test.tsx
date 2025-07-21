@@ -14,7 +14,7 @@ describe('CartItem Component', () => {
     test('renders item details correctly', () => {
     render(
         <CartItem
-            id={mockItem.productId}
+            productId={mockItem.productId}
             name={mockItem.name}
             quantity={mockItem.quantity}
             price={mockItem.price}
@@ -35,7 +35,7 @@ describe('CartItem Component', () => {
 
         render(
         <CartItem
-            id={mockItem.productId}
+            productId={mockItem.productId}
             name={mockItem.name}
             quantity={mockItem.quantity}
             price={mockItem.price}
@@ -56,7 +56,7 @@ describe('CartItem Component', () => {
 
         render(
         <CartItem
-            id={mockItem.productId}
+            productId={mockItem.productId}
             name={mockItem.name}
             quantity={mockItem.quantity}
             price={mockItem.price}

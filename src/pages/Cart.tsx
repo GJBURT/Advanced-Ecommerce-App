@@ -19,7 +19,6 @@ const Cart = () => {
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     const authContext = useContext(AuthContext);
-    const user = authContext?.user;
 
     const handleCheckout = async () => {
         if (!authContext?.user) {
@@ -61,13 +60,13 @@ const Cart = () => {
                         <ul>
                             {cartItems.map(item => (
                                 <CartItem
-                                    key={item.id}
-                                    id={item.id}
+                                    key={item.productId}
+                                    productId={item.productId}
                                     name={item.name}
                                     quantity={item.quantity}
                                     price={item.price}
                                     image={item.image}
-                                    onRemove={(id) => dispatch(removeFromCart(id))}
+                                    onRemove={(productId) => dispatch(removeFromCart(productId))}
                                 />
                             ))}
                         </ul>

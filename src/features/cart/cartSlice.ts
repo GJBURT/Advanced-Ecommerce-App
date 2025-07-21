@@ -1,9 +1,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 // CartItem defines the structure of an item in the cart
-// It includes properties like id, title, price, image, and quantity
+// It includes properties like id, name, price, image, and quantity
 interface CartItem {
-    id: number;
-    title: string;
+    productId: string;
+    name: string;
     price: number;
     image: string;
     quantity: number;
@@ -36,7 +36,7 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action: PayloadAction<CartItem>) => {
-            const existing = state.items.find(item => item.id === action.payload.id);
+            const existing = state.items.find(item => item.productId === action.payload.productId);
             if (existing) {
                 existing.quantity += action.payload.quantity;
             } else {
@@ -44,8 +44,8 @@ const cartSlice = createSlice({
             }
             saveCartToSession(state.items); // Save the updated cart to session storage
         },
-        removeFromCart: (state, action: PayloadAction<number>) => {
-            state.items = state.items.filter(item => item.id !== action.payload);
+        removeFromCart: (state, action: PayloadAction<string>) => {
+            state.items = state.items.filter(item => item.productId !== action.payload);
             saveCartToSession(state.items); // Save the updated cart to session storage
         },
         clearCart: (state) => {
