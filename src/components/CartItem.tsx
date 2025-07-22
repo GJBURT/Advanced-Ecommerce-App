@@ -13,21 +13,31 @@ interface Props {
 const CartItem: React.FC<Props> = ({ productId, name, quantity, price, image, onRemove, onQuantityChange }) => {
     return (
         <div className="cart-item">
-        <img src={image} alt={name} style={{ width: '50px', height: '50px', objectFit: 'contain' }} />
-        <strong> {name} </strong> <br />
-        Quantity: 
-                <input
+            <img src={image} alt={name} />
+
+            <div className="cart-details">
+                <strong>{name}</strong>
+                <p>
+                    Quantity:
+                    <input
+                    className="quantity-input"
                     type="number"
                     value={quantity}
                     min={1}
                     onChange={(e) => onQuantityChange?.(productId, Number(e.target.value))}
                     aria-label="Quantity"
-                />
-                <br />
-        Price: ${price.toFixed(2)} <br />
-        <button onClick={() => onRemove(productId)}>Remove</button>
+                    />
+                </p>
+
+                <p>Price: ${price.toFixed(2)}</p>
+
+                <button className="text-button" onClick={() => onRemove(productId)}>
+                    Remove
+                </button>
+            </div>
         </div>
     );
+
 };
 
 export default CartItem;

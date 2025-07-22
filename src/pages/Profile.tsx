@@ -109,7 +109,7 @@ const Profile: React.FC = () => {
     // Render profile form with editable fields for name and address
     // Email is displayed but not editable
     return (
-        <div style={{ padding: '2rem', maxWidth: '500px', margin: 'auto' }}>
+        <div className="page-container">
             <h2>👤 User Profile</h2>
             <label>
                 Name:

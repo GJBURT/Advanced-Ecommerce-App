@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const AdminPanel: React.FC = () => {
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="admin-container">
             <h2>🛠️ Admin Panel</h2>
             <p>Welcome, Admin! Choose an action:</p>
 
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+            <div className="admin-actions">
                 <Link to="/admin/products">
                     <button>📦 Manage Products</button>
                 </Link>

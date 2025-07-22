@@ -54,12 +54,14 @@ const AdminProducts: React.FC = () => {
     }
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="manage-products page-container">
             <h2>📦 Manage Products</h2>
+
             <Link to="/admin/products/new">
-                <button style={{ marginBottom: '1rem' }}>Add New Product</button>
+                <button className="add-button">Add New Product</button>
             </Link>
-            <table>
+
+            <table className="product-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -83,11 +85,11 @@ const AdminProducts: React.FC = () => {
                             <td>{product.description}</td>
                             <td>
                                 <Link to={`/admin/products/edit/${product.id}`}>
-                                    <button>Edit</button>
+                                    <button className="text-button">Edit</button>
                                 </Link>
-                                <button onClick={() => handleDelete(product.id)}>Delete</button>
+                                <button className="text-button" onClick={() => handleDelete(product.id)}>Delete</button>
                             </td>
-                            <td>{product.seeded && <span style={{ color: 'red', marginLeft: '0.5rem' }}>(Seeded)</span>}</td>
+                            <td>{product.seeded && <span className="seeded-label">(Seeded)</span>}</td>
                         </tr>
                     ))}
                 </tbody>

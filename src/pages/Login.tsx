@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
 import { loginUser } from '../firebase/auth';
-import './AuthStyles.css';
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
@@ -27,9 +26,9 @@ const Login: React.FC = () => {
 // This component provides a form for users to log in
 // It uses the loginUser function from the Firebase auth module to authenticate users
     return (
-        <div className="auth-container">
-            <div className="auth-box">
-                <h2>Login</h2>
+        <div className="container">
+            <div className="auth-form">
+                <h2 className="auth-header">Login</h2>
                 <form onSubmit={handleLogin}>
                     <input
                         type="email"

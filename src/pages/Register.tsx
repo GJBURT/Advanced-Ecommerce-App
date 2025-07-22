@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FirebaseError } from 'firebase/app';
 import { register } from '../firebase/auth'; // Import the register function
-import './AuthStyles.css'; // Import styles
 
 const Register: React.FC = () => {
     const [name, setName] = useState('');
@@ -27,9 +26,9 @@ const Register: React.FC = () => {
     // This component provides a form for users to register
     // It uses the register function from the Firebase auth module to create a new user
     return (
-        <div className="auth-container">
-            <div className="auth-box">
-                <h2>Register</h2>
+        <div className="container">
+            <div className="auth-form">
+                <h2 className="auth-header">Register</h2>
                 <form onSubmit={handleRegister}>
                     <input
                         type="text"
@@ -39,7 +38,7 @@ const Register: React.FC = () => {
                     required
                 />
                 <input
-                    type="address"
+                    type="text"
                     placeholder="Address"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}

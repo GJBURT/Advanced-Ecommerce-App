@@ -90,9 +90,10 @@ const AdminProductForm: React.FC = () => {
     
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="page-container">
             <h2>{isEditing ? '📝 Admin Product Form' : '➕ Add New Product'}</h2>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '400px' }}>
+            
+            <form onSubmit={handleSubmit} className="product-form">
                 <input
                     type="text"
                     name="name"

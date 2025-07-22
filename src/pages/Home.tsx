@@ -76,7 +76,7 @@ function Home() {
     if (!user) return null; // Don't render anything if user is not authenticated
 
     return (
-        <main>
+        <main className="page-container">
             <div>
                 <h2>🛒 Product Catalog</h2>
 

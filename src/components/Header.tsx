@@ -19,9 +19,9 @@ const Header: React.FC = () => {
     const isLoginPage = location.pathname === '/login';
 
     return (
-        <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
+        <header className="header">
             <h1>🛍️ Advanced E-Commerce App</h1>
-            <nav>
+            <nav className="nav-links">
                 {user ? (
                 <>
                     <label htmlFor="role-select">Role: </label>
@@ -47,7 +47,7 @@ const Header: React.FC = () => {
                 </>
                 ) : (
                 <>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                <div className="auth-toggle">
                     {isRegisterPage && <p>Already have an account? <Link to="/login">Login</Link></p>}
                     {isLoginPage && <p>Don't have an account? <Link to="/register">Register</Link></p>}
                 </div>

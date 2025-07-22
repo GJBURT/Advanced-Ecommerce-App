@@ -44,51 +44,51 @@ const Cart = () => {
     };
 
     return (
-        <>
-            <div style={{ marginBottom: '1rem' }}>
-                <Link to="/" style={{ textDecoration: 'none', color: 'blue' }}>
-                    ← Continue Shopping
-                </Link>
-            </div>
+        <div className="page-container">
             <div className="cart">
-                <h2>🛒Shopping Cart</h2>
+                <div className="cart-top">
+                    <Link to="/" className="link-back">
+                    ← Continue Shopping
+                    </Link>
+                </div>
+
+                <h2>🛒 Shopping Cart</h2>
 
                 {cartItems.length === 0 ? (
                     <p>Your cart is empty.</p>
                 ) : (
                     <div>
-                        {void console.log('Rendering cart items:', cartItems.map(item => item.productId))}
-
                         <ul>
                             {cartItems.map(item => (
-                                <CartItem
-                                    key={item.productId}
-                                    productId={item.productId}
-                                    name={item.name}
-                                    quantity={item.quantity}
-                                    price={item.price}
-                                    image={item.image}
-                                    onRemove={(productId) => dispatch(removeFromCart(productId))}
-                                    onQuantityChange={(productId: string, quantity: number) => dispatch(updateQuantity({ productId, quantity }))} />
+                            <CartItem
+                                key={item.productId}
+                                productId={item.productId}
+                                name={item.name}
+                                quantity={item.quantity}
+                                price={item.price}
+                                image={item.image}
+                                onRemove={(productId) => dispatch(removeFromCart(productId))}
+                                onQuantityChange={(productId: string, quantity: number) => dispatch(updateQuantity({ productId, quantity }))}
+                            />
                             ))}
                         </ul>
-                        <div className="cart-summary">
-                            <div style={{ marginBottom: '1rem' }}>
-                                <Link to="/" style={{ textDecoration: 'none', color: 'blue' }}>
-                                    ← Continue Shopping
-                                </Link>
-                            </div>
-                            <p>Total Items: {totalQuantity}</p>
-                            <p>Total Price: ${totalPrice.toFixed(2)}</p>
-                            <button style={{ marginTop: '1rem', padding: '0.5rem 1rem' }} onClick={handleCheckout}>
-                                Proceed to Checkout
-                            </button>
-                        </div>
+
+                    <div className="cart-summary">
+                        <Link to="/" className="link-back">
+                            ← Continue Shopping
+                        </Link>
+                        <p>Total Items: {totalQuantity}</p>
+                        <p>Total Price: ${totalPrice.toFixed(2)}</p>
+                        <button className="checkout-button" onClick={handleCheckout}>
+                            Proceed to Checkout
+                        </button>
                     </div>
-                )}
+                    </div>
+            )}
             </div>
-            </>
-    );
+        </div>
+        );
+
 };
 
     export default Cart;

@@ -58,19 +58,20 @@ const AdminOrders: React.FC = () => {
     }, []);
 
     return (
-        <div style={{ padding: '2rem' }}>
+        <div className="page-container">
             <h2>📋 View Orders</h2>
+
             {loading ? (
                 <p>Loading...</p>
             ) : orders.length === 0 ? (
                 <p>No orders found.</p>
             ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+                <div className="orders-list">
                     {orders.map(order => {
                         console.log("Order ID:", order.id, "Order Items:", order.items, "Type of items:", typeof order.items);
 
                         return (
-                            <div key={order.id} style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px' }}>
+                            <div key={order.id} className="order-card">
                                 <p><strong>Order ID:</strong> {order.id}</p>
                                 <p><strong>User ID:</strong> {order.userId}</p>
                                 <p><strong>Customer Name:</strong> {order.customerName ?? 'Unknown User'}</p>
@@ -84,15 +85,15 @@ const AdminOrders: React.FC = () => {
                                 </p>
 
 
-                                <details style={{ marginTop: '1rem' }}>
+                                <details className="order-details">
                                     <summary>View Items</summary>
                                     {!Array.isArray(order.items) || order.items.length === 0 ? (
                                         <p>No items in this order.</p>
                                     ) : (
-                                        <ul>
+                                        <ul className="order-items">
                                             {order.items.map((item, index) => (
                                                 <li key={index}>
-                                                    <img src={item.image} alt={item.name} style={{ width: '50px', height: '50px' }} />
+                                                    <img src={item.image} alt={item.name} className="order-item-img" />
                                                     <p>Name: {item.name}</p>
                                                     <p>Quantity: {item.quantity}</p>
                                                     <p>Price: ${item.price.toFixed(2)}</p>
