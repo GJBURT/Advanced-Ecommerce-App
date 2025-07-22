@@ -7,6 +7,7 @@ import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import CartItem from '../components/CartItem';
+import { useState } from 'react';
 
 // Cart component displays the items in the shopping cart
 // It allows users to view, remove items, and see the total price and quantity
@@ -19,6 +20,7 @@ const Cart = () => {
     const totalPrice = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     const authContext = useContext(AuthContext);
+    const [showToast, setShowToast] = useState(false);
 
     const handleCheckout = async () => {
         if (!authContext?.user) {
@@ -37,7 +39,8 @@ const Cart = () => {
             });
             // Clear the cart after successful order placement
             dispatch(clearCart());
-            alert('✅ Thank you! Your order has been placed.');
+            setShowToast(true);
+            setTimeout(() => setShowToast(false), 3000);
         } catch (error) {
             console.error('❌ Failed to place your order. Please try again:', error);
         }
@@ -86,6 +89,12 @@ const Cart = () => {
                     </div>
             )}
             </div>
+            {showToast && (
+                <div className="toast">
+                    ✅ Thank you! Your order has been placed.
+                    <button className="toast-close" onClick={() => setShowToast(false)}>✖</button>
+                </div>
+            )}
         </div>
         );
 

@@ -170,11 +170,30 @@ button.text-button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: #2ecc71;
-  color: white;
+  background: white;
+  color: #2ecc71;
   padding: 1rem 2rem;
   border-radius: 8px;
   z-index: 1000;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: fadeInOut 3s ease-in-out;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 1.25rem;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -60%); }
+  10% { opacity: 1; transform: translate(-50%, -50%); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, -40%); }
 }
 
 html, body, #root {
