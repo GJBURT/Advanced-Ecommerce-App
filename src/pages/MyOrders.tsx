@@ -21,25 +21,30 @@ const MyOrders: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-        if (currentUser) {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                try{
+                    const q = query(
+                        collection(db, 'orders'),
+                        where('userId', '==', currentUser.uid),
+                        orderBy('createdAt', 'desc')
+                    );
+                    const querySnapshot = await getDocs(q);
+                    const fetchedOrders = querySnapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    })) as Order[];
 
-            const q = query(
-                collection(db, 'orders'),
-                where('userId', '==', currentUser.uid),
-                orderBy('createdAt', 'desc')
-            );
-            const querySnapshot = await getDocs(q);
-            const fetchedOrders = querySnapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            })) as Order[];
-
-            setOrders(fetchedOrders);
-        } else {
-            setLoading(false);
-        }
-    });
+                    setOrders(fetchedOrders);
+                }catch (error) {
+                    console.error("Error fetching orders:", error);
+                } finally {
+                    setLoading(false);
+                }
+            } else {
+                setLoading(false);
+            }
+        });
 
     return () => unsubscribe();
 }, []);
@@ -59,7 +64,11 @@ const MyOrders: React.FC = () => {
                             <p><strong>Order ID:</strong> {order.id}</p>
                             <p><strong>Total Quantity:</strong> {order.totalQuantity}</p>
                             <p><strong>Total Price:</strong> ${order.totalPrice.toFixed(2)}</p>
-                            <p><strong>Created At:</strong> {order.createdAt?.toDate().toLocaleString() || 'Unknown'}</p>
+                            <p><strong>Created At:</strong> {
+                                order.createdAt?.toDate?.() instanceof Date 
+                                    ? order.createdAt.toDate().toLocaleString()
+                                    : 'Unknown'
+                            }</p>
 
                             <details className="order-details">
                                 <summary>View Items</summary>
